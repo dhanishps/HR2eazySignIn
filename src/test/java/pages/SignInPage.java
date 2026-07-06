@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import utilities.ElementUtil;
 
 public class SignInPage {
 	WebDriver driver;
@@ -32,12 +33,12 @@ public class SignInPage {
     
     public void SigninPageCLick() throws InterruptedException {
 
-        ClaimApplyPage claimApplyPage = new ClaimApplyPage(driver);
+    	ElementUtil elementUtil = new ElementUtil(driver);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         String parentWindow = driver.getWindowHandle();
 
-        claimApplyPage.ClickAction(signInBtn);
+        elementUtil.clickAction(signInBtn);
 
         wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 
@@ -82,7 +83,7 @@ public class SignInPage {
             driver.switchTo().window(parentWindow);
 
             // Open sign in popup again
-            claimApplyPage.ClickAction(signInBtn);
+            elementUtil.clickAction(signInBtn);
 
             wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 
