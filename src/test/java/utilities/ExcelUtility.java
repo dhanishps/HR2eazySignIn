@@ -11,35 +11,45 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelUtility {
-	public static String getData(String sheetName ,int row, int cell) throws IOException {
+	
 
-	    FileInputStream file = new FileInputStream("src\\test\\resources\\DaikinorgaDatas.xlsx");
+	    static String excelPath = System.getProperty("user.dir")
+	            + java.io.File.separator + "src"
+	            + java.io.File.separator + "test"
+	            + java.io.File.separator + "resources"
+	            + java.io.File.separator + "DaikinorgaDatas.xlsx";
 
-	    XSSFWorkbook workbook = new XSSFWorkbook(file);
+	    public static String getData(String sheetName, int row, int cell) throws IOException {
 
-	    XSSFSheet sheet = workbook.getSheet(sheetName);
+	        FileInputStream file = new FileInputStream(excelPath);
 
-	    DataFormatter formatter = new DataFormatter();
+	        XSSFWorkbook workbook = new XSSFWorkbook(file);
 
-	    String data = formatter.formatCellValue(
-	            sheet.getRow(row).getCell(cell));
+	        XSSFSheet sheet = workbook.getSheet(sheetName);
 
-	    workbook.close();
+	        DataFormatter formatter = new DataFormatter();
 
-	    return data;
-    }
+	        String data = formatter.formatCellValue(sheet.getRow(row).getCell(cell));
 
+	        workbook.close();
+	        file.close();
 
-public static int getRowCount(String sheetName) throws IOException {
-    FileInputStream fis = new FileInputStream("src\\test\\resources\\DaikinorgaDatas.xlsx");
-    Workbook wb = WorkbookFactory.create(fis);
-    Sheet sheet = wb.getSheet(sheetName);
+	        return data;
+	    }
 
-    int rowCount = sheet.getLastRowNum(); // excluding header
+	    public static int getRowCount(String sheetName) throws IOException {
 
-    wb.close();
-    fis.close();
+	        FileInputStream fis = new FileInputStream(excelPath);
 
-    return rowCount;
-}
-}
+	        Workbook wb = WorkbookFactory.create(fis);
+
+	        Sheet sheet = wb.getSheet(sheetName);
+
+	        int rowCount = sheet.getLastRowNum();
+
+	        wb.close();
+	        fis.close();
+
+	        return rowCount;
+	    }
+	}

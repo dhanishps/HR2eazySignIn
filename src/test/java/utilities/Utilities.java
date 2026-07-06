@@ -12,7 +12,13 @@ public class Utilities {
 	public static Properties getProperty() throws IOException {
 
 		prop = new Properties();
-		FileInputStream file = new FileInputStream("src\\test\\resources\\config.properties");
+		
+				String propertiesPath = System.getProperty("user.dir") 
+		        + java.io.File.separator + "src"
+		        + java.io.File.separator + "test"
+		        + java.io.File.separator + "resources"
+		        + java.io.File.separator + "config.properties";
+		FileInputStream file = new FileInputStream(propertiesPath);
 		prop.load(file);
 		return prop;
 	}
