@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import utilities.Utilities;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -23,7 +24,15 @@ public class BaseClass {
 		WebDriverManager.chromedriver().setup();
 
 		// Launch Browser
-		driver = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+
+		options.addArguments("--headless=new");
+		options.addArguments("--no-sandbox");
+		options.addArguments("--disable-dev-shm-usage");
+		options.addArguments("--disable-gpu");
+		options.addArguments("--window-size=1920,1080");
+
+		driver = new ChromeDriver(options);
 
 		// Maximize Window
 		driver.manage().window().maximize();
