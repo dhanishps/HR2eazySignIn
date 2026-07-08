@@ -32,7 +32,7 @@ public class BaseClass {
 		options.addArguments("--disable-gpu");
 		options.addArguments("--window-size=1920,1080");
 
-		driver = new ChromeDriver(options);
+		driver = new ChromeDriver(options);					
 
 		// Maximize Window
 		driver.manage().window().maximize();
